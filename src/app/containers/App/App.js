@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import logo from '../../../logo.svg';
+import { simpleAction } from './actions';
 
 import './App.less';
 
 class App extends Component {
+  simpleAction = () => {
+    this.props.simpleAction();
+  }
+
   render() {
     return (
       <div className="App">
@@ -12,9 +18,10 @@ class App extends Component {
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
-          <div class="alert alert-success" role="alert">
-            A simple success alert—check it out!
-          </div>
+          <button onClick={this.simpleAction}>Test redux action</button>
+          <p>
+            {this.props.message}
+          </p>
           <a
             className="App-link"
             href="https://reactjs.org"
@@ -29,4 +36,11 @@ class App extends Component {
   }
 };
 
-export default App;
+const mapStateToProps = state => ({ ...state.appReducer });
+
+const mapDispatchToProps = dispatch => ({
+  simpleAction: () => dispatch(simpleAction())
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
