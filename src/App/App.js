@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import logo from '../logo.svg';
+import './App.less';
 
 function App() {
   return (
@@ -10,6 +10,9 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+        <div class="alert alert-success" role="alert">
+          A simple success alert—check it out!
+        </div>
         <a
           className="App-link"
           href="https://reactjs.org"
