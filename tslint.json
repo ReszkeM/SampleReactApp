@@ -1,0 +1,25 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-react",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "interface-name": false,
+    "no-debugger": true,
+    "no-empty": false,
+    "no-duplicate-imports": true,
+    "no-shadowed-variable": true,
+    "no-unused-expression": true,
+    "no-var-keyword": true,
+    "no-return-await": true,
+    "no-duplicate-switch-case": true,
+    "prefer-const": true,
+    "prefer-object-spread": true,
+    "member-access": [
+      true,
+      "no-public"
+    ],
+    "object-literal-sort-keys": false
+  }
+}

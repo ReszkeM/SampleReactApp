@@ -3,4 +3,4 @@ export const simpleAction = () => ({
   payload: {
     message: 'Some Message'
   }
-})
+});
