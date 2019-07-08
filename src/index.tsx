@@ -6,7 +6,7 @@ import * as serviceWorker from './app/shared/utils/serviceWorker';
 import configureStore from './store';
 
 import 'bootstrap/dist/css/bootstrap.css';
-import './index.less';
+import './assets/styles/index.less';
 
 ReactDOM.render(
   <Provider store={configureStore()}>
