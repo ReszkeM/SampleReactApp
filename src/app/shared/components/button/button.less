@@ -1,0 +1,23 @@
+@import '../../../../assets/styles/variables.less';
+
+.btn {
+  &.btn-border-radius-none {
+    border-radius: 0;
+  }
+
+  &.btn-border-radius-left {
+    border-radius: @radius-xs 0 0 @radius-xs;
+  }
+
+  &.btn-border-radius-right {
+    border-radius: 0 @radius-xs @radius-xs 0;
+  }
+
+  &.btn-border-radius-top {
+    border-radius: @radius-xs @radius-xs 0 0;
+  }
+
+  &.btn-border-radius-bottom {
+    border-radius: 0 0 @radius-xs @radius-xs;
+  }
+}
