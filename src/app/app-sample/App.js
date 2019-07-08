@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import logo from '../../../logo.svg';
+import logo from '../../assets/images/logo.svg';
 import { simpleAction } from './actions';
 
 import './App.less';
@@ -34,13 +34,12 @@ class App extends Component {
       </div>
     );
   }
-};
+}
 
 const mapStateToProps = state => ({ ...state.appReducer });
 
 const mapDispatchToProps = dispatch => ({
   simpleAction: () => dispatch(simpleAction())
 })
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
