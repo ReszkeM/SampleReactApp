@@ -1,6 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { create } from 'react-test-renderer';
+
 import configureStore from '../../store';
 import App from './App';
 

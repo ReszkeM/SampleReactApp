@@ -32,8 +32,8 @@
     "@types/react": "16.8.23",
     "@types/react-dom": "16.8.4",
     "@types/react-redux": "7.1.1",
-    "@types/react-test-renderer": "^16.8.2",
-    "@types/sinon": "^7.0.13",
+    "@types/react-test-renderer": "16.8.2",
+    "@types/sinon": "7.0.13",
     "bootstrap": "4.3.1",
     "craco-less": "1.9.0",
     "react": "16.8.6",
@@ -43,14 +43,15 @@
     "react-scripts": "3.0.1",
     "redux": "4.0.1",
     "redux-thunk": "2.3.0",
-    "sinon": "^7.3.2",
+    "sinon": "7.3.2",
     "typescript": "3.5.2"
   },
   "devDependencies": {
     "prettier": "1.18.2",
-    "react-test-renderer": "^16.8.6",
+    "react-test-renderer": "16.8.6",
     "tslint": "5.18.0",
     "tslint-config-prettier": "1.18.0",
+    "tslint-origin-ordered-imports-rule": "1.2.2",
     "tslint-react": "4.0.0"
   }
 }

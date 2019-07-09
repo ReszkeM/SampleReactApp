@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import logo from '../../assets/images/logo.svg';
+
 import Button from '../shared/components/button/button';
 import { simpleAction } from './actions';
+import logo from '../../assets/images/logo.svg';
 
 import './App.less';
 

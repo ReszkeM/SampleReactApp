@@ -4,10 +4,24 @@
     "tslint-react",
     "tslint-config-prettier"
   ],
+  "rulesDirectory": [
+    "node_modules/tslint-origin-ordered-imports-rule/dist"
+  ],
   "rules": {
     "interface-name": false,
     "no-debugger": true,
     "no-empty": false,
+    "ordered-imports": false,
+    "origin-ordered-imports": [ 
+      true, 
+      "one-blank-line",
+      [
+          "lib",
+          "^@custom/.+",
+          "user",
+          "/*.(css|less)"
+      ] 
+    ],
     "no-duplicate-imports": true,
     "no-shadowed-variable": true,
     "no-unused-expression": true,
