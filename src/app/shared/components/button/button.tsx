@@ -7,11 +7,13 @@ interface IButtonProps {
   theme: 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
   borderRadius?: 'none' | 'left' | 'right' | 'top' | 'bottom';
   label?: string;
+  disabled: boolean;
 }
 
 export default class Button extends Component<IButtonProps, any> {
   static defaultProps = {
-    theme: 'primary'
+    theme: 'primary',
+    disabled: false
   };
 
   get className(): string {
@@ -22,10 +24,10 @@ export default class Button extends Component<IButtonProps, any> {
   }
 
   render(): JSX.Element {
-    const { onClick, label } = this.props;
+    const { onClick, label, disabled } = this.props;
 
     return (
-      <button onClick={onClick} className={this.className}>
+      <button onClick={onClick} className={this.className} disabled={disabled}>
         {label}
       </button>
     );

@@ -8,6 +8,11 @@ import Button from './button';
 describe('Button', () => {
   const fakeFunc = sinon.spy();
   const defaultClassName = 'btn btn-primary';
+  let container: HTMLDivElement;
+
+  beforeEach(() => {
+    container = document.createElement('div');
+  });
 
   it('it renders', () => {
     const component = create(<Button onClick={fakeFunc} />);
@@ -16,12 +21,6 @@ describe('Button', () => {
   });
 
   describe('calculate proper className', () => {
-    let container: HTMLDivElement;
-
-    beforeEach(() => {
-      container = document.createElement('div');
-    });
-
     describe('theme', () => {
       it('sets primary theme by default', () => {
         act(() => {
@@ -68,36 +67,58 @@ describe('Button', () => {
         expect(button.className).toEqual(expectedClassName);
       });
     });
+  });
 
-    describe('label', () => {
-      it('shows no label by default', () => {
-        act(() => {
-          ReactDOM.render(<Button onClick={fakeFunc} />, container);
-        });
-
-        const button = container.getElementsByClassName(defaultClassName)[0];
-        expect(button.innerHTML).toEqual('');
+  describe('label', () => {
+    it('shows no label by default', () => {
+      act(() => {
+        ReactDOM.render(<Button onClick={fakeFunc} />, container);
       });
 
-      it('sets style for choosen radius', () => {
-        const expectedText = 'some label';
-
-        act(() => {
-          ReactDOM.render(<Button onClick={fakeFunc} label={expectedText} />, container);
-        });
-
-        const button = container.getElementsByClassName(defaultClassName)[0];
-        expect(button.innerHTML).toEqual(expectedText);
-      });
+      const button = container.getElementsByClassName(defaultClassName)[0];
+      expect(button.innerHTML).toEqual('');
     });
 
-    describe('onClick', () => {
-      it('calls function', () => {
-        const component = create(<Button onClick={fakeFunc} />);
-        component.root.findByType('button').props.onClick();
+    it('sets style for choosen radius', () => {
+      const expectedText = 'some label';
 
-        expect(fakeFunc.calledOnce).toBeTruthy();
+      act(() => {
+        ReactDOM.render(<Button onClick={fakeFunc} label={expectedText} />, container);
       });
+
+      const button = container.getElementsByClassName(defaultClassName)[0];
+      expect(button.innerHTML).toEqual(expectedText);
+    });
+  });
+
+  describe('onClick', () => {
+    it('calls function', () => {
+      const component = create(<Button onClick={fakeFunc} />);
+      component.root.findByType('button').props.onClick();
+
+      expect(fakeFunc.calledOnce).toBeTruthy();
+    });
+  });
+
+  describe('disabled', () => {
+    it('its enabled', () => {
+      act(() => {
+        ReactDOM.render(<Button onClick={fakeFunc} />, container);
+      });
+
+      const button = container.getElementsByClassName(defaultClassName)[0];
+
+      expect(button.getAttribute('disabled')).toEqual(null);
+    });
+
+    it('its disabled', () => {
+      act(() => {
+        ReactDOM.render(<Button onClick={fakeFunc} disabled={true} />, container);
+      });
+
+      const button = container.getElementsByClassName(defaultClassName)[0];
+
+      expect(button.getAttribute('disabled')).toEqual('');
     });
   });
 });
