@@ -1,0 +1,31 @@
+@import '../../../../assets/styles/variables.less';
+
+.form-group {
+  .form-label {
+    width: 100%;
+    text-align: left;
+    font-size: @font-size-md;
+  }
+
+  .form-control {
+    &.form-control-border-radius-none {
+      border-radius: 0;
+    }
+
+    &.form-control-border-radius-left {
+      border-radius: @radius-xs 0 0 @radius-xs;
+    }
+
+    &.form-control-border-radius-right {
+      border-radius: 0 @radius-xs @radius-xs 0;
+    }
+
+    &.form-control-border-radius-top {
+      border-radius: @radius-xs @radius-xs 0 0;
+    }
+
+    &.form-control-border-radius-bottom {
+      border-radius: 0 0 @radius-xs @radius-xs;
+    }
+  }
+}
