@@ -8,7 +8,7 @@ import TextField from './text-field';
 describe('TextField', () => {
   const fakeFunc = sinon.spy();
   const testValue = 'some value';
-  const containerClassName = 'form-group';
+  const containerClassName = 'form-container';
   let container: HTMLDivElement;
 
   beforeEach(() => {

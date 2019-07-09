@@ -25,7 +25,7 @@ export default class TextField extends Component<ITextField, any> {
   }
 
   get className(): string {
-    return ['form-group', this.props.className].filter(Boolean).join(' ');
+    return ['form-container', this.props.className].filter(Boolean).join(' ');
   }
 
   get fieldClassName(): string {

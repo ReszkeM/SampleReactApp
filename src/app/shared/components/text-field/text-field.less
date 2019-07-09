@@ -1,13 +1,19 @@
 @import '../../../../assets/styles/variables.less';
 
-.form-group {
+.form-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
   .form-label {
-    width: 100%;
+    margin-bottom: @spacing-xs;
     text-align: left;
     font-size: @font-size-md;
   }
 
   .form-control {
+    height: @field-height;
+
     &.form-control-border-radius-none {
       border-radius: 0;
     }
