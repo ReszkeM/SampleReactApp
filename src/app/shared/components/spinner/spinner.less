@@ -1,0 +1,24 @@
+@import '../../../../assets/styles/mixins.less';
+
+@spinner-size-sm: 40px;
+@spinner-size-md: 60px;
+@spinner-size-lg: 80px;
+@spinner-size-xlg: 100px;
+
+.spinner-border {
+  &.spinner-sm {
+    .block-size(@spinner-size-sm);
+  }
+
+  &.spinner-md {
+    .block-size(@spinner-size-md);
+  }
+
+  &.spinner-lg {
+    .block-size(@spinner-size-lg);
+  }
+
+  &.spinner-xlg {
+    .block-size(@spinner-size-xlg);
+  }
+}
