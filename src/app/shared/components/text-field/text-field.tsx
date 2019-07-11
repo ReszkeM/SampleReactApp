@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './text-field.less';
 
-interface ITextField {
+interface ITextFieldProps {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
@@ -12,13 +12,13 @@ interface ITextField {
   disabled: boolean;
 }
 
-export default class TextField extends Component<ITextField, any> {
+export default class TextField extends Component<ITextFieldProps, any> {
   static defaultProps = {
     disabled: false,
     placeholder: 'Fill in'
   };
 
-  constructor(props: ITextField) {
+  constructor(props: ITextFieldProps) {
     super(props);
 
     this.handleOnChange = this.handleOnChange.bind(this);

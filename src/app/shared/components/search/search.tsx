@@ -6,7 +6,7 @@ import TextField from '../text-field/text-field';
 import './search.less';
 
 interface ISearchProps {
-  onSubmit: () => void;
+  onSubmit: (value: string) => void;
   label?: string;
   className?: string;
 }
@@ -21,6 +21,7 @@ export default class Search extends Component<ISearchProps, ISearchState> {
     this.state = { value: '' };
 
     this.handleSearchValueChange = this.handleSearchValueChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   get className(): string {
@@ -31,12 +32,20 @@ export default class Search extends Component<ISearchProps, ISearchState> {
     this.setState({ value });
   }
 
+  handleSubmit(): void {
+    this.props.onSubmit(this.state.value);
+  }
+
   render(): JSX.Element {
-    const { label, onSubmit } = this.props;
     return (
       <div className={this.className}>
-        <TextField onChange={this.handleSearchValueChange} value={this.state.value} label={label} borderRadius="left" />
-        <Button onClick={onSubmit} label="Szukaj" borderRadius="right" theme="danger" />
+        <TextField
+          onChange={this.handleSearchValueChange}
+          value={this.state.value}
+          label={this.props.label}
+          borderRadius="left"
+        />
+        <Button onClick={this.handleSubmit} label="Szukaj" borderRadius="right" theme="danger" />
       </div>
     );
   }

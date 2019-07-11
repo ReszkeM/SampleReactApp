@@ -1,0 +1,34 @@
+@import '../../../../assets/styles/variables.less';
+
+@header-height: 210px;
+@top-margin: 40px;
+@aaa: calc(-15px);
+
+.debts-header {
+  display: flex;
+  flex-wrap: wrap;
+  height: @header-height;
+  padding-top: @top-margin;
+  background-color: #003152;
+  color: white;
+  text-transform: uppercase;
+
+  > div {
+    margin-top: @spacing-sm;
+  }
+
+  .debts-total-count {
+    @media (min-width: @screen-sm-min) {
+      text-align: end;
+    }
+
+    .label {
+      font-size: @font-size-lg;
+    }
+
+    .value {
+      font-size: @field-height;
+      line-height: 1;
+    }
+  }
+}
