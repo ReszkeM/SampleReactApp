@@ -1,0 +1,40 @@
+@import '../../../../assets/styles/variables.less';
+
+.debts-table-row {
+  color: #003152;
+
+  &.row-selected {
+    background-color: #e0e0e0;
+    vertical-align: top;
+  }
+
+  .label {
+    font-size: @font-size-md;
+    color: black;
+  }
+
+  .main-row {
+    .expander {
+      vertical-align: middle;
+      color: red;
+
+      &:hover {
+        color: #003152;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .expanded-row {
+    .price-number-cell {
+      display: flex;
+      justify-content: space-between;
+      padding-right: 0;
+
+      .price {
+        padding-right: @spacing-lg;
+      }
+    }
+  }
+}
