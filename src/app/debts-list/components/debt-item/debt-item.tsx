@@ -23,7 +23,7 @@ export default class DebtItem extends Component<IDebtsItemProps, {}> {
   }
 
   handleToggle(): void {
-    this.props.onToggle(this.props.debt.id);
+    this.props.onToggle(this.props.debt.Id);
   }
 
   render(): JSX.Element {
@@ -32,15 +32,15 @@ export default class DebtItem extends Component<IDebtsItemProps, {}> {
         <tr className="main-row">
           <td>
             {this.props.isExpanded && <div className="label">Dłużnik</div>}
-            {this.props.debt.name}
+            {this.props.debt.Name}
           </td>
           <td>
             {this.props.isExpanded && <div className="label">Nip</div>}
-            {this.props.debt.nip}
+            {this.props.debt.NIP}
           </td>
           <td>
             {this.props.isExpanded && <div className="label">Kwota zadłużenia</div>}
-            {this.props.debt.value}
+            {this.props.debt.Value}
           </td>
           <td className="expander">
             <a onClick={this.handleToggle}>{this.props.isExpanded ? 'Mniej' : 'Więcej'}</a>
@@ -50,22 +50,22 @@ export default class DebtItem extends Component<IDebtsItemProps, {}> {
           <tr className="expanded-row">
             <td>
               {this.props.isExpanded && <div className="label">Adres</div>}
-              {this.props.debt.address}
+              {this.props.debt.Address}
             </td>
             <td>
               {this.props.isExpanded && (
                 <div className="label">Rodzaj/typ dokumentu stanowiący podstawę dla wierzytelności</div>
               )}
-              {this.props.debt.documentType}
+              {this.props.debt.DocumentType}
             </td>
             <td className="price-number-cell">
               <div className="price">
                 {this.props.isExpanded && <div className="label">Cena zadłużenia</div>}
-                {this.props.debt.price}
+                {this.props.debt.Price}
               </div>
               <div>
                 {this.props.isExpanded && <div className="label">Numer</div>}
-                {this.props.debt.number}
+                {this.props.debt.Number}
               </div>
             </td>
             <td />

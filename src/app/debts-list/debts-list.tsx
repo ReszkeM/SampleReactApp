@@ -68,9 +68,9 @@ class DebtsList extends Component<IDebtsListProps, IDebtsListState> {
           {this.props.debts.map((debt: DebtListItem) => (
             <DebtItem
               debt={debt}
-              key={debt.id}
+              key={debt.Id}
               onToggle={this.handleItemToggle}
-              isExpanded={debt.id === this.state.expandedRowId}
+              isExpanded={debt.Id === this.state.expandedRowId}
             />
           ))}
         </table>

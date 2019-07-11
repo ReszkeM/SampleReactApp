@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@craco/craco": "5.2.3",
+    "@types/axios": "^0.14.0",
     "@types/jest": "24.0.15",
     "@types/node": "12.0.12",
     "@types/react": "16.8.23",
@@ -35,6 +36,7 @@
     "@types/react-router-dom": "4.3.4",
     "@types/react-test-renderer": "16.8.2",
     "@types/sinon": "7.0.13",
+    "axios": "^0.19.0",
     "bootstrap": "4.3.1",
     "craco-less": "1.9.0",
     "react": "16.8.6",

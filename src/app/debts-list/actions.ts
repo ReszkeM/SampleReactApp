@@ -1,9 +1,10 @@
 import { Action, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
+import axios from 'axios';
 
 import DebtListItem from './models/debtListItem';
-import { testTopDebts } from './test-data';
 import { DebtsListState } from './reducer';
+import { GET_TOP_DEBTS_URL } from '../shared/utils/constants';
 
 export enum DebtsListActionTypes {
   loadTopDebts = '[DEBTS_LIST] LOAD_TOP_DEBTS',
@@ -39,8 +40,8 @@ export const loadDebts = (): ThunkAction<void, DebtsListState, null, LoadTopDebt
   dispatch(loadTopDebtsStart());
 
   try {
-    await Promise.resolve('');
-    dispatch(loadTopDebtsSuccess(testTopDebts));
+    const result = await axios.get<DebtListItem[]>(GET_TOP_DEBTS_URL);
+    dispatch(loadTopDebtsSuccess(result.data));
   } catch(error) {
     dispatch(loadTopDebtsError());
   }

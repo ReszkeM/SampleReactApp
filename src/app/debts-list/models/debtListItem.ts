@@ -1,10 +1,10 @@
 export default interface DebtListItem {
-  id: number;
-  name: string;
-  nip: string;
-  value: number;
-  address: string;
-  documentType: string;
-  price: number;
-  number: number;
+  Id: number;
+  Name: string;
+  NIP: string;
+  Value: number;
+  Address: string;
+  DocumentType: string;
+  Price: number;
+  Number: number;
 }
