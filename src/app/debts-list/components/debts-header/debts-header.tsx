@@ -5,7 +5,6 @@ import Search from '../../../shared/components/search/search';
 import './debts-header.less';
 
 interface IDebtsHeaderProps {
-  value: string;
   onFilterChange: (value: string) => void;
   debtsTotalCount: number;
 }

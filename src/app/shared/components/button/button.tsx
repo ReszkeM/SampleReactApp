@@ -10,7 +10,7 @@ interface IButtonProps {
   disabled: boolean;
 }
 
-export default class Button extends Component<IButtonProps, any> {
+export default class Button extends Component<IButtonProps, {}> {
   static defaultProps = {
     theme: 'primary',
     disabled: false
