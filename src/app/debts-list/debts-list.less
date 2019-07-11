@@ -1,0 +1,27 @@
+.debts-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .debts-loading, .debts-empty, .debts-error {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .debts-list {
+    .debts-table-header {
+      .debtor,
+      .nip,
+      .debt {
+        width: 600px;
+        min-width: 100px;
+      }
+
+      .actions {
+        width: 60px;
+      }
+    }
+  }
+}
