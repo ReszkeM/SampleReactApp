@@ -15,7 +15,7 @@ interface ITextFieldProps {
 export default class TextField extends Component<ITextFieldProps, any> {
   static defaultProps = {
     disabled: false,
-    placeholder: 'Fill in'
+    placeholder: ''
   };
 
   constructor(props: ITextFieldProps) {

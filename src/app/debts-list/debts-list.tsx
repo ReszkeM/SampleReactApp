@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Spinner from '../shared/components/spinner/spinner';
+import { DebtsListState } from './reducer';
 import DebtsHeader from './components/debts-header/debts-header';
 import DebtItem from './components/debt-item/debt-item';
 import DebtListItem from './models/debtListItem';
-import { DebtsListState } from './reducer';
-import { loadDebts } from './actions';
+import { loadDebtsList } from './actions/debts-list';
+import { loadFilteredDebts } from './actions/debts-filter';
+import Spinner from '../shared/components/spinner/spinner';
 import { AppState } from '../../rootReducer';
 
 import './debts-list.less';
 
 interface IDebtsListProps extends DebtsListState {
   loadFilteredDebts: (value: string) => void;
-  loadTotalDebtsCount: () => void;
-  loadDebts: () => void;
+  loadDebtsList: () => void;
 }
 
 interface IDebtsListState {
@@ -30,24 +30,33 @@ class DebtsList extends Component<IDebtsListProps, IDebtsListState> {
     };
 
     this.handleItemToggle = this.handleItemToggle.bind(this);
+    this.handleDebtsFilter = this.handleDebtsFilter.bind(this);
   }
 
-  componentDidMount(): void {
-    this.props.loadDebts();
+  componentWillMount(): void {
+    this.props.loadDebtsList();
   }
 
   handleItemToggle(id: number): void {
     this.setState({ expandedRowId: id === this.state.expandedRowId ? null : id });
   }
 
+  handleDebtsFilter(value: string): void {
+    if (!!value) {
+      this.props.loadFilteredDebts(value)
+    } else {
+      this.props.loadDebtsList();
+    }
+  }
+
   render(): JSX.Element {
-    const { loadFilteredDebts, debts, isLoading, isLoadingError } = this.props;
+    const { debts, totalDebtsCount, isLoading, isLoadingError } = this.props;
     return (
       <div className="debts-container">
-        <DebtsHeader onFilterChange={loadFilteredDebts} debtsTotalCount={88} />
+        <DebtsHeader onFilterChange={this.handleDebtsFilter} debtsTotalCount={totalDebtsCount} />
         {isLoading && <div className="debts-loading"><Spinner /></div>}
         {!!debts.length && this.renderDebtsTable()}
-        {!debts.length && !isLoadingError && this.renderEmptyState()}
+        {!debts.length && !isLoadingError && !isLoading && this.renderEmptyState()}
         {isLoadingError && this.renderLoadingError()}
       </div>
     );
@@ -98,9 +107,8 @@ class DebtsList extends Component<IDebtsListProps, IDebtsListState> {
 const mapStateToProps = (state: AppState) => ({ ...state.debtsListReducer });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  loadFilteredDebts: (value: string) => dispatch(),
-  loadTotalDebtsCount: () => dispatch(),
-  loadDebts: () => dispatch(loadDebts())
+  loadFilteredDebts: (value: string) => dispatch(loadFilteredDebts(value)),
+  loadDebtsList: () => dispatch(loadDebtsList())
 });
 
 export default connect(
