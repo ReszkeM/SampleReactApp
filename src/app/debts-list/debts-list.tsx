@@ -98,7 +98,12 @@ class DebtsList extends Component<IDebtsListProps, IDebtsListState> {
   private renderLoadingError(): JSX.Element {
     return (
       <div className="debts-error">
-        <h1>Loading Debts failed. Please try again</h1>
+        <h1>
+          {this.props.errorMessage
+            ? this.props.errorMessage
+            : "Loading Debts failed. Please try again"
+          }
+        </h1>
       </div>
     )
   }
