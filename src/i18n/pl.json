@@ -1,0 +1,47 @@
+{
+  "translation": {
+    "COMPONENTS": {
+      "SEARCH": {
+        "SUBMIT_BUTTON_LABEL": "Szukaj"
+      },
+      "SPINNER": {
+        "TEXT": "Ładuję..."
+      }
+    }
+  },
+  "DEBTS_LIST": {
+    "NOT_FOUND": {
+      "TITLE": "Nie znaleziono dłużników.",
+      "MESSAGE": "Spróbuj ponownie z innymi kryteriami wyszukiwania"
+    },
+    "ERROR": {
+      "TITLE": "Wystąpił bąd podczas ładowania dłużników.",
+      "MESSAGE": "Spróbuj jeszcze raz."
+    },
+    "TO_SHORT_FILTER": {
+      "TITLE": "Wartość filtra jest zbyt krótka.",
+      "MESSAGE": "Spróbuj jeszcze raz z dłuższą wartością."
+    },
+    "DEBTS_HEADER": {
+      "TOTAL_DEBTS_COUNT": "Całkowita ilośc spraw"
+    },
+    "DEBTS_TABLE": {
+      "HEADER": {
+        "DEBTOR": "Dłużnik",
+        "NIP": "NIP",
+        "DEBT": "Kwota zadłużenia"
+      },
+      "ITEM": {
+        "DEBTOR": "Dłużnik",
+        "NIP": "NIP",
+        "DEBT": "Kwota zadłużenia",
+        "ADDRESS": "Adres",
+        "DOCUMENT_TYPE": "Rodzaj/typ dokumentu stanowiący podstawę dla wierzytelności",
+        "DEBT_PRICE": "Cena zadłużenia",
+        "NUMBER": "Numer",
+        "EXPAND": "Więcej",
+        "COLLAPSE": "Mniej"
+      }
+    }
+  }
+}

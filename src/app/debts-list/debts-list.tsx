@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withTranslation, WithTranslation } from 'react-i18next';
 
 import { DebtsListState } from './reducers/reducer';
 import { loadDebtsList, filterDebts } from './actions/thunk-actions';
@@ -11,7 +12,7 @@ import { AppState } from '../../rootReducer';
 
 import './debts-list.less';
 
-interface IDebtsListProps extends DebtsListState {
+interface IDebtsListProps extends DebtsListState, WithTranslation {
   loadFilteredDebts: (value: string) => void;
   loadDebtsList: () => void;
 }
@@ -71,9 +72,9 @@ class DebtsList extends Component<IDebtsListProps, IDebtsListState> {
         <table className="debts-table col-12 col-md-10 offset-md-1">
           <thead className="debts-table-header">
             <tr>
-              <th className="debtor">DŁUŻNIK</th>
-              <th className="nip">NIP</th>
-              <th className="debt">KWOTA ZADŁUŻENIA</th>
+              <th className="debtor">{this.props.t('DEBTS_TABLE.HEADER.DEBTOR')}</th>
+              <th className="nip">{this.props.t('DEBTS_TABLE.HEADER.NIP')}</th>
+              <th className="debt">{this.props.t('DEBTS_TABLE.HEADER.DEBT')}</th>
               <th className="actions" />
             </tr>
           </thead>
@@ -93,15 +94,19 @@ class DebtsList extends Component<IDebtsListProps, IDebtsListState> {
   private renderEmptyState(): JSX.Element {
     return (
       <div className="debts-empty">
-        <h1>No Debts found.</h1>
+        <h1>{this.props.t('NOT_FOUND.TITLE')}</h1>
+        <h3>{this.props.t('NOT_FOUND.MESSAGE')}</h3>
       </div>
     );
   }
 
   private renderLoadingError(): JSX.Element {
+    const title = this.props.errorMessage ? `${this.props.errorMessage}.TITLE` : 'ERROR.TITLE';
+    const message = this.props.errorMessage ? `${this.props.errorMessage}.MESSAGE` : 'ERROR.MESSAGE';
     return (
       <div className="debts-error">
-        <h1>{this.props.errorMessage ? this.props.errorMessage : 'Loading Debts failed. Please try again'}</h1>
+        <h1>{this.props.t(title)}</h1>
+        <h3>{this.props.t(message)}</h3>
       </div>
     );
   }
@@ -117,4 +122,4 @@ const mapDispatchToProps = (dispatch: any) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(DebtsList);
+)(withTranslation('DEBTS_LIST')(DebtsList));

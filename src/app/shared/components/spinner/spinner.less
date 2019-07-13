@@ -1,24 +1,34 @@
 @import '../../../../assets/styles/mixins.less';
+@import '../../../../assets/styles/variables.less';
 
 @spinner-size-sm: 40px;
 @spinner-size-md: 60px;
 @spinner-size-lg: 80px;
 @spinner-size-xlg: 100px;
 
-.spinner-border {
-  &.spinner-sm {
-    .block-size(@spinner-size-sm);
-  }
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-transform: uppercase;
 
-  &.spinner-md {
-    .block-size(@spinner-size-md);
-  }
+  .spinner-border {
+    margin-bottom: @spacing-xlg;
 
-  &.spinner-lg {
-    .block-size(@spinner-size-lg);
-  }
+    &.spinner-sm {
+      .block-size(@spinner-size-sm);
+    }
 
-  &.spinner-xlg {
-    .block-size(@spinner-size-xlg);
+    &.spinner-md {
+      .block-size(@spinner-size-md);
+    }
+
+    &.spinner-lg {
+      .block-size(@spinner-size-lg);
+    }
+
+    &.spinner-xlg {
+      .block-size(@spinner-size-xlg);
+    }
   }
 }

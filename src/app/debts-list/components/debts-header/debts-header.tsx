@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
+import { withTranslation, WithTranslation } from 'react-i18next';
 
 import Search from '../../../shared/components/search/search';
 
 import './debts-header.less';
 
-interface IDebtsHeaderProps {
+interface IDebtsHeaderProps extends WithTranslation {
   onFilterChange: (value: string) => void;
   debtsTotalCount: number;
 }
 
-export default class DebtsHeader extends Component<IDebtsHeaderProps, any> {
+class DebtsHeader extends Component<IDebtsHeaderProps, any> {
   constructor(props: IDebtsHeaderProps) {
     super(props);
 
@@ -30,10 +31,12 @@ export default class DebtsHeader extends Component<IDebtsHeaderProps, any> {
         </div>
 
         <div className="debts-total-count col-12 col-md-5">
-          <div className="label">Całkowita ilośc spraw</div>
+          <div className="label">{this.props.t('DEBTS_HEADER.TOTAL_DEBTS_COUNT')}</div>
           <div className="value">{debtsTotalCount}</div>
         </div>
       </div>
     );
   }
 }
+
+export default withTranslation('DEBTS_LIST')(DebtsHeader);

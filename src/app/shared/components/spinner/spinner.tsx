@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
+import { withTranslation, WithTranslation } from 'react-i18next';
 
 import './spinner.less';
 
-export interface ISpinnerProps {
+export interface ISpinnerProps extends WithTranslation {
   size: 'xs' | 'sm' | 'md' | 'lg' | 'xlg';
   className?: string;
 }
 
-export default class Spinner extends Component<ISpinnerProps, {}> {
+class Spinner extends Component<ISpinnerProps, {}> {
   static defaultProps = {
     size: 'xlg'
   };
@@ -18,9 +19,13 @@ export default class Spinner extends Component<ISpinnerProps, {}> {
 
   render(): JSX.Element {
     return (
-      <div className={this.className} role="status">
-        <span className="sr-only">Loading...</span>
+      <div className="spinner-container">
+        <div className={this.className} role="status" />
+        <div className="spinner-message">{this.props.t('COMPONENTS.SPINNER.TEXT')}</div>
       </div>
     );
   }
 }
+
+// <any> is a workaround for type issue with default props
+export default withTranslation()<any>(Spinner);

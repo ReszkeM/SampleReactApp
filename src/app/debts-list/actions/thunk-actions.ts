@@ -37,6 +37,6 @@ export const filterDebts = (filter: string): ThunkAction<void, DebtsListState, n
 
     dispatch(loadDebtsSuccess({ debts: result.data }));
   } catch (error) {
-    dispatch(loadDebtsError(error.response && error.response.status === 405 ? 'Filter Value is to short' : undefined));
+    dispatch(loadDebtsError(error.response && error.response.status === 405 ? 'TO_SHORT_FILTER' : undefined));
   }
 };

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { withTranslation, WithTranslation } from 'react-i18next';
 
 import Button from '../button/button';
 import TextField from '../text-field/text-field';
 
 import './search.less';
 
-interface ISearchProps {
+interface ISearchProps extends WithTranslation {
   onSubmit: (value: string) => void;
   label?: string;
   className?: string;
@@ -15,7 +16,7 @@ interface ISearchState {
   value: string;
 }
 
-export default class Search extends Component<ISearchProps, ISearchState> {
+class Search extends Component<ISearchProps, ISearchState> {
   constructor(props: any) {
     super(props);
     this.state = { value: '' };
@@ -45,8 +46,15 @@ export default class Search extends Component<ISearchProps, ISearchState> {
           label={this.props.label}
           borderRadius="left"
         />
-        <Button onClick={this.handleSubmit} label="Szukaj" borderRadius="right" theme="danger" />
+        <Button
+          onClick={this.handleSubmit}
+          label={this.props.t('COMPONENTS.SEARCH.SUBMIT_BUTTON_LABEL')}
+          borderRadius="right"
+          theme="danger"
+        />
       </div>
     );
   }
 }
+
+export default withTranslation()(Search);
