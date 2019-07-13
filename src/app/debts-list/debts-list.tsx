@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { DebtsListState } from './reducer';
+import { loadDebtsList, filterDebts } from './actions/thunk-actions';
 import DebtsHeader from './components/debts-header/debts-header';
 import DebtItem from './components/debt-item/debt-item';
 import DebtListItem from './models/debtListItem';
-import { loadDebtsList } from './actions/debts-list';
-import { loadFilteredDebts } from './actions/debts-filter';
 import Spinner from '../shared/components/spinner/spinner';
 import { AppState } from '../../rootReducer';
 
@@ -111,7 +110,7 @@ class DebtsList extends Component<IDebtsListProps, IDebtsListState> {
 const mapStateToProps = (state: AppState) => ({ ...state.debtsListReducer });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  loadFilteredDebts: (value: string) => dispatch(loadFilteredDebts(value)),
+  loadFilteredDebts: (value: string) => dispatch(filterDebts(value)),
   loadDebtsList: () => dispatch(loadDebtsList())
 });
 

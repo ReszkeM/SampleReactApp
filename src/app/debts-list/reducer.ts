@@ -1,6 +1,5 @@
 import DebtListItem from './models/debtListItem';
-import { DebtsListActionTypes, TopDebtsListActions, LoadDebtsListSuccess } from './actions/debts-list';
-import { DebtsFilterActionTypes, LoadFilteredDebtsSuccess, LoadFilteredDebtsFailed } from './actions/debts-filter';
+import { DebtsListActionTypes, DebtsListActions } from './actions/types';
 
 export interface DebtsListState {
   debts: DebtListItem[];
@@ -18,10 +17,9 @@ export const initialState: DebtsListState = {
   errorMessage: undefined
 };
 
-export function debtsListReducer(state: DebtsListState = initialState, action: TopDebtsListActions): DebtsListState {
+export function debtsListReducer(state: DebtsListState = initialState, action: DebtsListActions): DebtsListState {
   switch (action.type) {
-    case DebtsListActionTypes.loadTopDebtsStart:
-    case DebtsFilterActionTypes.loadFilteredDebtsStart:
+    case DebtsListActionTypes.loadDebtsStart:
       return {
         ...state,
         debts: [],
@@ -29,29 +27,20 @@ export function debtsListReducer(state: DebtsListState = initialState, action: T
         isLoadingError: false
       };
 
-    case DebtsListActionTypes.loadTopDebtsSuccess:
-    case DebtsFilterActionTypes.loadFilteredDebtsSuccess:
+    case DebtsListActionTypes.loadDebtsSuccess:
       return {
         ...state,
         isLoading: false,
         isLoadingError: false,
-        ...(action as LoadDebtsListSuccess | LoadFilteredDebtsSuccess).payload
+        ...action.payload
       };
 
-    case DebtsListActionTypes.loadTopDebtsFailed:
-      return {
-        ...state,
-        totalDebtsCount: 0,
-        isLoading: false,
-        isLoadingError: true
-      };
-
-    case DebtsFilterActionTypes.loadFilteredDebtsFailed:
+    case DebtsListActionTypes.loadDebtsFailed:
       return {
         ...state,
         isLoading: false,
         isLoadingError: true,
-        ...(action as LoadFilteredDebtsFailed).payload
+        ...action.payload
       };
 
     default:
