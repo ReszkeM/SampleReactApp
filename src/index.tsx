@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import App from './app/app-sample/App';
 import DebtsList from './app/debts-list/debts-list';
 import * as serviceWorker from './app/shared/utils/service-worker';
 import configureStore from './store';
@@ -15,7 +14,6 @@ ReactDOM.render(
   <Provider store={configureStore()}>
     <Router>
       <Route exact={true} path="/" component={DebtsList} />
-      <Route path="/sandbox" component={App} />
     </Router>
   </Provider>,
   document.getElementById('root')
