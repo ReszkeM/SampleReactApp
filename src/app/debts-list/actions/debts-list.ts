@@ -37,7 +37,9 @@ export const loadTopDebtsError = (): LoadDebtsListFailed => ({
   type: DebtsListActionTypes.loadTopDebtsFailed
 });
 
-export const loadDebtsList = (): ThunkAction<void, DebtsListState, null, LoadDebtsListStart> => async (dispatch: Dispatch): Promise<void> => {
+export const loadDebtsList = (): ThunkAction<void, DebtsListState, null, LoadDebtsListStart> => async (
+  dispatch: Dispatch
+): Promise<void> => {
   dispatch(loadTopDebtsStart());
 
   try {
@@ -45,7 +47,7 @@ export const loadDebtsList = (): ThunkAction<void, DebtsListState, null, LoadDeb
     const totalCountResult = await axios.get<number>(GET_DEBTS_COUNT_URL);
 
     dispatch(loadTopDebtsSuccess(topDebtsResult.data, totalCountResult.data));
-  } catch(error) {
+  } catch (error) {
     dispatch(loadTopDebtsError());
   }
 };

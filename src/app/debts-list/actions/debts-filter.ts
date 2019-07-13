@@ -41,14 +41,18 @@ export const loadFilteredDebtsError = (errorMessage?: string): LoadFilteredDebts
   payload: { errorMessage }
 });
 
-export const loadFilteredDebts = (filter: string): ThunkAction<void, DebtsListState, null, LoadFilteredDebtsStart> => async (dispatch: Dispatch): Promise<void> => {
+export const loadFilteredDebts = (
+  filter: string
+): ThunkAction<void, DebtsListState, null, LoadFilteredDebtsStart> => async (dispatch: Dispatch): Promise<void> => {
   dispatch(loadFilteredDebtsStart());
 
   try {
     const result = await axios.post<DebtListItem[]>(GET_FILTERED_DEBTS_URL, { filter });
     dispatch(loadFilteredDebtsSuccess(result.data));
-  } catch(error) {
-    dispatch(loadFilteredDebtsError(error.response && error.response.status === 405 ? "Filter Value is to short" : undefined));
+  } catch (error) {
+    dispatch(
+      loadFilteredDebtsError(error.response && error.response.status === 405 ? 'Filter Value is to short' : undefined)
+    );
   }
 };
 

@@ -43,7 +43,7 @@ class DebtsList extends Component<IDebtsListProps, IDebtsListState> {
 
   handleDebtsFilter(value: string): void {
     if (!!value) {
-      this.props.loadFilteredDebts(value)
+      this.props.loadFilteredDebts(value);
     } else {
       this.props.loadDebtsList();
     }
@@ -54,7 +54,11 @@ class DebtsList extends Component<IDebtsListProps, IDebtsListState> {
     return (
       <div className="debts-container">
         <DebtsHeader onFilterChange={this.handleDebtsFilter} debtsTotalCount={totalDebtsCount} />
-        {isLoading && <div className="debts-loading"><Spinner /></div>}
+        {isLoading && (
+          <div className="debts-loading">
+            <Spinner />
+          </div>
+        )}
         {!!debts.length && this.renderDebtsTable()}
         {!debts.length && !isLoadingError && !isLoading && this.renderEmptyState()}
         {isLoadingError && this.renderLoadingError()}
@@ -84,7 +88,7 @@ class DebtsList extends Component<IDebtsListProps, IDebtsListState> {
           ))}
         </table>
       </div>
-    )
+    );
   }
 
   private renderEmptyState(): JSX.Element {
@@ -92,20 +96,15 @@ class DebtsList extends Component<IDebtsListProps, IDebtsListState> {
       <div className="debts-empty">
         <h1>No Debts found.</h1>
       </div>
-    )
+    );
   }
 
   private renderLoadingError(): JSX.Element {
     return (
       <div className="debts-error">
-        <h1>
-          {this.props.errorMessage
-            ? this.props.errorMessage
-            : "Loading Debts failed. Please try again"
-          }
-        </h1>
+        <h1>{this.props.errorMessage ? this.props.errorMessage : 'Loading Debts failed. Please try again'}</h1>
       </div>
-    )
+    );
   }
 }
 

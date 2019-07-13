@@ -7,7 +7,7 @@ export interface DebtsListState {
   totalDebtsCount: number;
   isLoading: boolean;
   isLoadingError: boolean;
-  errorMessage?: string
+  errorMessage?: string;
 }
 
 export const initialState: DebtsListState = {
@@ -45,7 +45,7 @@ export function debtsListReducer(state: DebtsListState = initialState, action: T
         isLoading: false,
         isLoadingError: true
       };
-  
+
     case DebtsFilterActionTypes.loadFilteredDebtsFailed:
       return {
         ...state,
