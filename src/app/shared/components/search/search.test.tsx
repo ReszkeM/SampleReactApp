@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import { create } from 'react-test-renderer';
 
 import Search from './search';
-import { expectFindToThrow } from '../../utils/testHelpers';
+import { shouldThrow } from '../../utils/test-helpers';
 
 describe('Search', () => {
   const fakeFunc = sinon.spy();
@@ -39,7 +39,7 @@ describe('Search', () => {
   describe('label', () => {
     it('hidde label by default', () => {
       const component = create(<Search onSubmit={fakeFunc} />);
-      expectFindToThrow(() => component.root.findByType('label'));
+      expect(shouldThrow(() => component.root.findByType('label'))).toBeTruthy();
     });
 
     it('show label passed in props', () => {

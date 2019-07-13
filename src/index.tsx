@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 
 import App from './app/app-sample/App';
 import DebtsList from './app/debts-list/debts-list';
-import * as serviceWorker from './app/shared/utils/serviceWorker';
+import * as serviceWorker from './app/shared/utils/service-worker';
 import configureStore from './store';
 
 import 'bootstrap/dist/css/bootstrap.css';
