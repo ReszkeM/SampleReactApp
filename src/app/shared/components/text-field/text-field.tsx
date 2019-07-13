@@ -12,7 +12,7 @@ interface ITextFieldProps {
   disabled: boolean;
 }
 
-export default class TextField extends Component<ITextFieldProps, any> {
+export default class TextField extends Component<ITextFieldProps, {}> {
   static defaultProps = {
     disabled: false,
     placeholder: ''

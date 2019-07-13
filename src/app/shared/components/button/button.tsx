@@ -6,6 +6,7 @@ interface IButtonProps {
   onClick: () => void;
   theme: 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
   borderRadius?: 'none' | 'left' | 'right' | 'top' | 'bottom';
+  className?: string;
   label?: string;
   disabled: boolean;
 }
@@ -20,7 +21,7 @@ export default class Button extends Component<IButtonProps, {}> {
     const themeClass = `btn-${this.props.theme}`;
     const radiusClass = this.props.borderRadius && `btn-border-radius-${this.props.borderRadius}`;
 
-    return ['btn', themeClass, radiusClass].filter(Boolean).join(' ');
+    return ['btn', themeClass, radiusClass, this.props.className].filter(Boolean).join(' ');
   }
 
   render(): JSX.Element {

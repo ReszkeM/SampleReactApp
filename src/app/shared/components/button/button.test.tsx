@@ -1,18 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import sinon from 'sinon';
-import { act, create } from 'react-test-renderer';
+import { create } from 'react-test-renderer';
 
 import Button from './button';
 
 describe('Button', () => {
   const fakeFunc = sinon.spy();
   const defaultClassName = 'btn btn-primary';
-  let container: HTMLDivElement;
-
-  beforeEach(() => {
-    container = document.createElement('div');
-  });
 
   it('it renders', () => {
     const component = create(<Button onClick={fakeFunc} />);
@@ -21,104 +15,90 @@ describe('Button', () => {
   });
 
   describe('calculate proper className', () => {
-    describe('theme', () => {
-      it('sets primary theme by default', () => {
-        act(() => {
-          ReactDOM.render(<Button onClick={fakeFunc} />, container);
-        });
-
-        const button = container.getElementsByClassName(defaultClassName)[0];
-        expect(button).toBeTruthy();
+    describe('className', () => {
+      it('set `btn btn-primary` class by default', () => {
+        const component = create(<Button onClick={fakeFunc} />);
+        const button = component.root.findByType('button');
+        expect(button.props.className).toEqual(defaultClassName);
       });
 
-      it('sets choosen theme', () => {
-        act(() => {
-          ReactDOM.render(<Button onClick={fakeFunc} theme="secondary" />, container);
-        });
+      it('add custom class', () => {
+        const customClassName = 'custom-class';
+        const expectedClassName = `${defaultClassName} ${customClassName}`;
+        const component = create(<Button onClick={fakeFunc} className={customClassName} />);
+        const button = component.root.findByType('button');
+        expect(button.props.className).toEqual(expectedClassName);
+      });
+    });
 
-        let button = container.getElementsByClassName(defaultClassName)[0];
-        expect(button).toBeFalsy();
+    describe('theme', () => {
+      it('set primary theme by default', () => {
+        const component = create(<Button onClick={fakeFunc} />);
+        const button = component.root.findByType('button');
+        expect(button.props.className).toEqual(defaultClassName);
+      });
 
-        button = container.getElementsByClassName('btn btn-secondary')[0];
-        expect(button).toBeTruthy();
+      it('set choosen theme', () => {
+        const expectedClassName = 'btn btn-secondary';
+        const component = create(<Button onClick={fakeFunc} theme="secondary" />);
+        const button = component.root.findByType('button');
+        expect(button.props.className).toEqual(expectedClassName);
       });
     });
 
     describe('radius', () => {
-      it('sets no radius style by default', () => {
-        const expectedClassName = 'btn btn-primary';
-
-        act(() => {
-          ReactDOM.render(<Button onClick={fakeFunc} />, container);
-        });
-
-        const button = container.getElementsByClassName(defaultClassName)[0];
-        expect(button.className).toEqual(expectedClassName);
+      it('set no radius style by default', () => {
+        const component = create(<Button onClick={fakeFunc} />);
+        const button = component.root.findByType('button');
+        expect(button.props.className).toEqual(defaultClassName);
       });
 
-      it('sets style for choosen radius', () => {
-        const expectedClassName = 'btn btn-primary btn-border-radius-none';
-
-        act(() => {
-          ReactDOM.render(<Button onClick={fakeFunc} borderRadius="none" />, container);
-        });
-
-        const button = container.getElementsByClassName(defaultClassName)[0];
-        expect(button.className).toEqual(expectedClassName);
+      it('set style for choosen radius', () => {
+        const expectedClassName = `${defaultClassName} btn-border-radius-none`;
+        const component = create(<Button onClick={fakeFunc} borderRadius="none" />);
+        const button = component.root.findByType('button');
+        expect(button.props.className).toEqual(expectedClassName);
       });
     });
   });
 
   describe('label', () => {
-    it('shows no label by default', () => {
-      act(() => {
-        ReactDOM.render(<Button onClick={fakeFunc} />, container);
-      });
-
-      const button = container.getElementsByClassName(defaultClassName)[0];
-      expect(button.innerHTML).toEqual('');
-    });
-
-    it('sets style for choosen radius', () => {
-      const expectedText = 'some label';
-
-      act(() => {
-        ReactDOM.render(<Button onClick={fakeFunc} label={expectedText} />, container);
-      });
-
-      const button = container.getElementsByClassName(defaultClassName)[0];
-      expect(button.innerHTML).toEqual(expectedText);
-    });
-  });
-
-  describe('onClick', () => {
-    it('calls function', () => {
+    it('hide label by default', () => {
       const component = create(<Button onClick={fakeFunc} />);
-      component.root.findByType('button').props.onClick();
+      const button = component.root.findByType('button');
+      expect(button.props.children).toBeUndefined();
+    });
 
-      expect(fakeFunc.calledOnce).toBeTruthy();
+    it('show label passed in props', () => {
+      const expectedText = 'some label';
+      const component = create(<Button onClick={fakeFunc} label={expectedText} />);
+      const button = component.root.findByType('button');
+      expect(button.props.children).toEqual(expectedText);
     });
   });
 
   describe('disabled', () => {
     it('its enabled', () => {
-      act(() => {
-        ReactDOM.render(<Button onClick={fakeFunc} />, container);
-      });
-
-      const button = container.getElementsByClassName(defaultClassName)[0];
-
-      expect(button.getAttribute('disabled')).toEqual(null);
+      const component = create(<Button onClick={fakeFunc} />);
+      const button = component.root.findByType('button');
+      expect(button.props.disabled).toBeFalsy();
     });
 
     it('its disabled', () => {
-      act(() => {
-        ReactDOM.render(<Button onClick={fakeFunc} disabled={true} />, container);
+      const component = create(<Button onClick={fakeFunc} disabled={true} />);
+      const button = component.root.findByType('button');
+      expect(button.props.disabled).toBeTruthy();
+    });
+  });
+
+  describe('UI tests', () => {
+    describe('onClick', () => {
+      it('calls function', () => {
+        const component = create(<Button onClick={fakeFunc} />);
+        const button = component.root.findByType('button');
+        button.props.onClick();
+        expect(fakeFunc.calledOnce).toBeTruthy();
       });
-
-      const button = container.getElementsByClassName(defaultClassName)[0];
-
-      expect(button.getAttribute('disabled')).toEqual('');
     });
   });
 });

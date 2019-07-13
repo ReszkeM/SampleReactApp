@@ -1,18 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import sinon from 'sinon';
-import { create, act } from 'react-test-renderer';
+import { create } from 'react-test-renderer';
 
 import TextField from './text-field';
+import { expectFindToThrow } from '../../utils/testHelpers';
 
 describe('TextField', () => {
   const fakeFunc = sinon.spy();
   const testValue = 'some value';
-  const containerClassName = 'form-container';
-  let container: HTMLDivElement;
 
   beforeEach(() => {
-    container = document.createElement('div');
+    fakeFunc.resetHistory();
   });
 
   it('it renders', () => {
@@ -23,115 +21,105 @@ describe('TextField', () => {
 
   describe('calculate proper className', () => {
     describe('for container', () => {
-      it('sets default className', () => {
-        act(() => {
-          ReactDOM.render(<TextField value={testValue} onChange={fakeFunc} />, container);
-        });
+      const defaultClassName = 'form-container';
 
-        const field = container.getElementsByClassName(containerClassName)[0];
-        expect(field).toBeTruthy();
+      it('set `search-form` class by default', () => {
+        const component = create(<TextField value={testValue} onChange={fakeFunc} />);
+        const container = component.root.findByType('div');
+        expect(container.props.className).toEqual(defaultClassName);
       });
 
-      it('use class name from params', () => {
-        const expectedClass = 'some-class';
-
-        act(() => {
-          ReactDOM.render(<TextField value={testValue} onChange={fakeFunc} className={expectedClass} />, container);
-        });
-
-        const field = container.getElementsByClassName(`${containerClassName} ${expectedClass}`)[0];
-        expect(field).toBeTruthy();
+      it('add custom class theme', () => {
+        const customClassName = 'custom-class';
+        const expectedClassName = `${defaultClassName} ${customClassName}`;
+        const component = create(<TextField value={testValue} onChange={fakeFunc} className={customClassName} />);
+        const container = component.root.findByType('div');
+        expect(container.props.className).toEqual(expectedClassName);
       });
     });
 
     describe('for form control', () => {
       const defaultClassName = 'form-control';
 
-      it('sets no radius style by default', () => {
-        const expectedClassName = defaultClassName;
-
-        act(() => {
-          ReactDOM.render(<TextField value={testValue} onChange={fakeFunc} />, container);
-        });
-
-        const button = container.getElementsByClassName(defaultClassName)[0];
-        expect(button.className).toEqual(expectedClassName);
+      it('set `search-form` class by default', () => {
+        const component = create(<TextField value={testValue} onChange={fakeFunc} />);
+        const input = component.root.findByType('input');
+        expect(input.props.className).toEqual(defaultClassName);
       });
 
-      it('sets style for choosen radius', () => {
+      it('add custom class theme', () => {
         const expectedClassName = `${defaultClassName} form-control-border-radius-none`;
-
-        act(() => {
-          ReactDOM.render(<TextField value={testValue} onChange={fakeFunc} borderRadius="none" />, container);
-        });
-
-        const button = container.getElementsByClassName(defaultClassName)[0];
-        expect(button.className).toEqual(expectedClassName);
+        const component = create(<TextField value={testValue} onChange={fakeFunc} borderRadius="none" />);
+        const input = component.root.findByType('input');
+        expect(input.props.className).toEqual(expectedClassName);
       });
     });
   });
 
   describe('label', () => {
-    const labelClass = 'form-label';
-
-    it('shows no label by default', () => {
-      act(() => {
-        ReactDOM.render(<TextField value={testValue} onChange={fakeFunc} />, container);
-      });
-
-      const label = container.getElementsByClassName(labelClass)[0];
-      expect(label).toBeFalsy();
+    it('hidde label by default', () => {
+      const component = create(<TextField value={testValue} onChange={fakeFunc} />);
+      expectFindToThrow(() => component.root.findByType('label'));
     });
 
-    it('sets style for choosen radius', () => {
+    it('show label passed in props', () => {
       const expectedText = 'some label';
-
-      act(() => {
-        ReactDOM.render(<TextField value={testValue} onChange={fakeFunc} label={expectedText} />, container);
-      });
-
-      const label = container.getElementsByClassName(labelClass)[0];
+      const component = create(<TextField value={testValue} onChange={fakeFunc} label={expectedText} />);
+      const label = component.root.findByType('label');
       expect(label).toBeTruthy();
-      expect(label.innerHTML).toEqual(expectedText);
+      expect(label.props.children).toEqual(expectedText);
     });
   });
 
-  describe('onChange', () => {
-    it('calls function', () => {
-      let valueToChange = '';
-      const expectedValue = 'lorem ipsum';
-      const changeValue = (value: string) => {
-        valueToChange = value;
-      };
+  describe('placeholder', () => {
+    it('hidde placeholder by default', () => {
+      const component = create(<TextField value={testValue} onChange={fakeFunc} />);
+      const input = component.root.findByType('input');
+      expect(input.props.placeholder).toEqual('');
+    });
 
-      const component = create(<TextField value={valueToChange} onChange={changeValue} />);
-      component.root.findByType('input').props.onChange({ target: { value: expectedValue } });
-
-      expect(valueToChange).toEqual(expectedValue);
+    it('show placeholder passed in props', () => {
+      const expectedText = 'some placeholder';
+      const component = create(<TextField value={testValue} onChange={fakeFunc} placeholder={expectedText} />);
+      const input = component.root.findByType('input');
+      expect(input.props.placeholder).toEqual(expectedText);
     });
   });
 
   describe('disabled', () => {
-    const controlClassName = 'form-control';
-
     it('its enabled', () => {
-      act(() => {
-        ReactDOM.render(<TextField value={testValue} onChange={fakeFunc} />, container);
-      });
-
-      const button = container.getElementsByClassName(controlClassName)[0];
-
-      expect(button.getAttribute('disabled')).toEqual(null);
+      const component = create(<TextField value={testValue} onChange={fakeFunc} />);
+      const input = component.root.findByType('input');
+      expect(input.props.disabled).toBeFalsy();
     });
 
     it('its disabled', () => {
-      act(() => {
-        ReactDOM.render(<TextField value={testValue} onChange={fakeFunc} disabled={true} />, container);
+      const component = create(<TextField value={testValue} onChange={fakeFunc} disabled={true} />);
+      const input = component.root.findByType('input');
+      expect(input.props.disabled).toBeTruthy();
+    });
+  });
+
+  describe('functions tests', () => {
+    it('handleSubmit', () => {
+      const expectedValue = 'lorem ipsum';
+      const component = create(<TextField value={testValue} onChange={fakeFunc} />);
+      const instance = (component.getInstance() as any) as TextField;
+
+      instance.handleOnChange({ target: { value: expectedValue } } as React.ChangeEvent<HTMLInputElement>);
+      expect(fakeFunc.calledOnceWith(expectedValue)).toBeTruthy();
+    });
+  });
+
+  describe('UI tests', () => {
+    describe('onChange', () => {
+      it('calls function', () => {
+        const expectedValue = 'lorem ipsum';
+        const component = create(<TextField value={testValue} onChange={fakeFunc} />);
+        component.root.findByType('input').props.onChange({ target: { value: expectedValue } });
+
+        expect(fakeFunc.calledOnceWith(expectedValue)).toBeTruthy();
       });
-
-      const button = container.getElementsByClassName(controlClassName)[0];
-
-      expect(button.getAttribute('disabled')).toEqual('');
     });
   });
 });

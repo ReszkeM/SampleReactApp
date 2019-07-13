@@ -4,6 +4,7 @@ import './spinner.less';
 
 export interface ISpinnerProps {
   size: 'xs' | 'sm' | 'md' | 'lg' | 'xlg';
+  className?: string;
 }
 
 export default class Spinner extends Component<ISpinnerProps, {}> {
@@ -12,7 +13,7 @@ export default class Spinner extends Component<ISpinnerProps, {}> {
   };
 
   get className(): string {
-    return `spinner-border spinner-${this.props.size}`;
+    return ['spinner-border', `spinner-${this.props.size}`, this.props.className].filter(Boolean).join(' ');
   }
 
   render(): JSX.Element {
