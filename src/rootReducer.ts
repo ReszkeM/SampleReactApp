@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import { debtsListReducer } from './app/debts-list/reducer';
+import { debtsListReducer } from './app/debts-list/reducers/reducer';
 
 const rootReducer = combineReducers({
   debtsListReducer

@@ -3,7 +3,7 @@ import { Dispatch } from 'redux';
 import axios from 'axios';
 
 import DebtListItem from '../models/debtListItem';
-import { DebtsListState } from '../reducer';
+import { DebtsListState } from '../reducers/reducer';
 import { LoadDebtsStart, LoadfilteredDebts } from './types';
 import { loadDebtsStart, loadDebtsSuccess, loadDebtsError } from './actions';
 
@@ -34,6 +34,7 @@ export const filterDebts = (filter: string): ThunkAction<void, DebtsListState, n
 
   try {
     const result = await axios.post<DebtListItem[]>(GET_FILTERED_DEBTS_URL, { filter });
+
     dispatch(loadDebtsSuccess({ debts: result.data }));
   } catch (error) {
     dispatch(loadDebtsError(error.response && error.response.status === 405 ? 'Filter Value is to short' : undefined));

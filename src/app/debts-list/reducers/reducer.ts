@@ -1,5 +1,5 @@
-import DebtListItem from './models/debtListItem';
-import { DebtsListActionTypes, DebtsListActions } from './actions/types';
+import DebtListItem from '../models/debtListItem';
+import { DebtsListActionTypes, DebtsListActions } from '../actions/types';
 
 export interface DebtsListState {
   debts: DebtListItem[];

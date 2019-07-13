@@ -1,10 +1,4 @@
-import {
-  DebtsListActionTypes,
-  LoadDebtsStart,
-  LoadDebtsFailed,
-  LoadDebtsSuccess,
-  LoadDebtsSuccessData
-} from './types';
+import { DebtsListActionTypes, LoadDebtsStart, LoadDebtsFailed, LoadDebtsSuccess, LoadDebtsSuccessData } from './types';
 
 export const loadDebtsStart = (): LoadDebtsStart => ({
   type: DebtsListActionTypes.loadDebtsStart

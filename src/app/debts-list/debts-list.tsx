@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { DebtsListState } from './reducer';
+import { DebtsListState } from './reducers/reducer';
 import { loadDebtsList, filterDebts } from './actions/thunk-actions';
 import DebtsHeader from './components/debts-header/debts-header';
 import DebtItem from './components/debt-item/debt-item';
