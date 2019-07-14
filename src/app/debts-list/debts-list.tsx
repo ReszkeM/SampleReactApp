@@ -92,19 +92,19 @@ class DebtsList extends Component<IDebtsListProps, IDebtsListState> {
   }
 
   private renderEmptyState(): JSX.Element {
-    return (
-      <div className="debts-empty">
-        <h1>{this.props.t('NOT_FOUND.TITLE')}</h1>
-        <h3>{this.props.t('NOT_FOUND.MESSAGE')}</h3>
-      </div>
-    );
+    return this.renderMessage('debts-empty', this.props.t('NOT_FOUND.TITLE'), this.props.t('NOT_FOUND.MESSAGE'));
   }
 
   private renderLoadingError(): JSX.Element {
     const title = this.props.errorMessage ? `${this.props.errorMessage}.TITLE` : 'ERROR.TITLE';
     const message = this.props.errorMessage ? `${this.props.errorMessage}.MESSAGE` : 'ERROR.MESSAGE';
+    return this.renderMessage('debts-error', title, message);
+  }
+
+  // TODO: This could be a shared component
+  private renderMessage(className: string, title: string, message: string): JSX.Element {
     return (
-      <div className="debts-error">
+      <div className={className}>
         <h1>{this.props.t(title)}</h1>
         <h3>{this.props.t(message)}</h3>
       </div>
