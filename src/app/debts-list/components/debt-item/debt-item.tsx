@@ -11,7 +11,7 @@ interface IDebtsItemProps extends WithTranslation {
   onToggle: (id: number) => void;
 }
 
-class DebtItem extends Component<IDebtsItemProps, {}> {
+export class DebtItem extends Component<IDebtsItemProps, {}> {
   constructor(props: IDebtsItemProps) {
     super(props);
 
@@ -19,7 +19,7 @@ class DebtItem extends Component<IDebtsItemProps, {}> {
   }
 
   get className(): string {
-    const selectedClas = this.props.isExpanded && 'row-selected';
+    const selectedClas = this.props.isExpanded && 'row-expanded';
     return ['debts-table-row', selectedClas].filter(Boolean).join(' ');
   }
 

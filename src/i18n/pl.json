@@ -23,7 +23,8 @@
       "MESSAGE": "Spróbuj jeszcze raz z dłuższą wartością."
     },
     "DEBTS_HEADER": {
-      "TOTAL_DEBTS_COUNT": "Całkowita ilośc spraw"
+      "TOTAL_DEBTS_COUNT": "Całkowita ilośc spraw",
+      "SEARCH_LABEL": "Podaj numer sprawy, nazwę lub nip dłużnika"
     },
     "DEBTS_TABLE": {
       "HEADER": {

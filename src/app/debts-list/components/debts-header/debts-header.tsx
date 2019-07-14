@@ -10,7 +10,7 @@ interface IDebtsHeaderProps extends WithTranslation {
   debtsTotalCount: number;
 }
 
-class DebtsHeader extends Component<IDebtsHeaderProps, any> {
+export class DebtsHeader extends Component<IDebtsHeaderProps, any> {
   constructor(props: IDebtsHeaderProps) {
     super(props);
 
@@ -27,7 +27,7 @@ class DebtsHeader extends Component<IDebtsHeaderProps, any> {
     return (
       <div className="debts-header">
         <div className="debts-filter col-12 col-md-5 offset-md-1">
-          <Search onSubmit={this.handleFilterChange} label="Podaj numer sprawy, nazwę lub nip dłużnika" />
+          <Search onSubmit={this.handleFilterChange} label={this.props.t('DEBTS_HEADER.SEARCH_LABEL')} />
         </div>
 
         <div className="debts-total-count col-12 col-md-5">

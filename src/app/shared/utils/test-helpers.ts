@@ -1,6 +1,6 @@
 import { ReactTestInstance } from 'react-test-renderer';
 
-type FindFunc = () => ReactTestInstance;
+type FindFunc = (args?: any) => ReactTestInstance;
 
 export const i18nMockedProps = {
   t: (key: any) => key,
@@ -12,7 +12,7 @@ export function shouldThrow(findFunc: FindFunc): boolean {
   try {
     findFunc();
   } catch (error) {
-    return error.message === 'No instances found with node type: "undefined"';
+    return error.message.includes('No instances found');
   }
 
   return false;
