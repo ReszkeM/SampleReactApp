@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withTranslation, WithTranslation } from 'react-i18next';
 
-import { DebtsListState } from './reducers/reducer';
-import { loadDebtsList, filterDebts } from './actions/thunk-actions';
-import DebtsHeader from './components/debts-header/debts-header';
-import DebtItem from './components/debt-item/debt-item';
-import DebtListItem from './models/debtListItem';
-import Spinner from '../shared/components/spinner/spinner';
-import { AppState } from '../../rootReducer';
+import { DebtsListState } from '../reducers/reducer';
+import { loadDebtsList, filterDebts } from '../actions/thunk-actions';
+import DebtsHeader from '../components/debts-header/debts-header';
+import DebtItem from '../components/debt-item/debt-item';
+import DebtListItem from '../models/debtListItem';
+import Spinner from '../../shared/components/spinner/spinner';
+import { AppState } from '../../../rootReducer';
 
 import './debts-list.less';
 
@@ -21,7 +21,7 @@ interface IDebtsListState {
   expandedRowId: number | null;
 }
 
-class DebtsList extends Component<IDebtsListProps, IDebtsListState> {
+export class DebtsList extends Component<IDebtsListProps, IDebtsListState> {
   constructor(props: IDebtsListProps) {
     super(props);
 
@@ -41,7 +41,7 @@ class DebtsList extends Component<IDebtsListProps, IDebtsListState> {
     this.setState({ expandedRowId: id === this.state.expandedRowId ? null : id });
   }
 
-  handleDebtsFilter(value: string): void {
+  handleDebtsFilter(value?: string): void {
     if (!!value) {
       this.props.loadFilteredDebts(value);
     } else {

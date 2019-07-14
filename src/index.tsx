@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import DebtsList from './app/debts-list/debts-list';
+import DebtsList from './app/debts-list/containers/debts-list';
 import * as serviceWorker from './app/shared/utils/service-worker';
 import configureStore from './store';
 import './i18n/index';
