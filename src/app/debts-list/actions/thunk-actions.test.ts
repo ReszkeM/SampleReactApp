@@ -99,7 +99,7 @@ describe('Thunk Actions', () => {
       return store.dispatch<any>(filterDebts('aa')).then(() => {
         const actualActions = store.getActions();
         expect(actualActions[1].type).toEqual(DebtsListActionTypes.loadDebtsFailed);
-        expect(actualActions[1].payload).toEqual({ errorMessage: 'Filter Value is to short' });
+        expect(actualActions[1].payload).toEqual({ errorMessage: 'TO_SHORT_FILTER' });
       });
     });
   });

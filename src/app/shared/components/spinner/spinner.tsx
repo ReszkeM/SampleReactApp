@@ -8,7 +8,7 @@ export interface ISpinnerProps extends WithTranslation {
   className?: string;
 }
 
-class Spinner extends Component<ISpinnerProps, {}> {
+export class Spinner extends Component<ISpinnerProps, {}> {
   static defaultProps = {
     size: 'xlg'
   };

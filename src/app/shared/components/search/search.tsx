@@ -16,7 +16,7 @@ interface ISearchState {
   value: string;
 }
 
-class Search extends Component<ISearchProps, ISearchState> {
+export class Search extends Component<ISearchProps, ISearchState> {
   constructor(props: any) {
     super(props);
     this.state = { value: '' };
